@@ -10,10 +10,10 @@
 
 /*****  Structure Definitions  *****/
 struct flight {
-    char f_code[MAX_FLIGHT_CODE];
-    char origin[MAX_AIRLINE_CODE];
-    char dest[MAX_AIRLINE_CODE];
-    char timestamp[DATE_SIZE];
+	char f_code[MAX_FLIGHT_CODE];
+	char origin[MAX_AIRLINE_CODE];
+	char dest[MAX_AIRLINE_CODE];
+	char timestamp[DATE_SIZE];
 };
 
 /*****  Typing Definitions  *****/
@@ -22,8 +22,9 @@ typedef struct flight* FlightPtr;
 
 
 /*****  fileconverter.c Prototypes  *****/
-void generate_file(char[], int);
-void convert(char*, char*, Flight[]);
+void generate_file(const char[], int);
+void convert(const char*, const char*, Flight[]);
+void convertBinaryStringFile(const char*, Flight[], int);
 
 /*****  indexer.c Prototypes  *****/
 
@@ -34,3 +35,5 @@ void convert(char*, char*, Flight[]);
 /*****  utils.c Prototypes  *****/
 void print_flight(Flight);
 int random_range(int, int);
+char* strToBinStr(char*);
+char* binStrToStr(char*);
