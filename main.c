@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	// convert("output.bin", "", flights);
 	// convert("test.bin", flights);
 
-	convert("output.bin", flights, SIZE);
+	convert("test.bin", flights, SIZE);
 
 	for (int i=0; i<10; i++) {
 		print_flight(flights[i]);

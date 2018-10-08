@@ -1,10 +1,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#define MAX_FLIGHT_CODE 10
-#define MAX_AIRLINE_CODE 10
-#define DATE_SIZE 40
-#define FLIGHT_SIZE 80
+#define MAX_FLIGHT_CODE 7
+#define MAX_AIRLINE_CODE 4
+#define DATE_SIZE 20
+#define FLIGHT_SIZE MAX_FLIGHT_CODE + (2*MAX_AIRLINE_CODE) + DATE_SIZE
 
 
 
