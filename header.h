@@ -1,10 +1,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#define MAX_FLIGHT_CODE 6
-#define MAX_AIRLINE_CODE 4
-#define DATE_SIZE 17
-#define FLIGHT_SIZE 31
+#define MAX_FLIGHT_CODE 10
+#define MAX_AIRLINE_CODE 10
+#define DATE_SIZE 40
+#define FLIGHT_SIZE 80
 
 
 
@@ -23,8 +23,9 @@ typedef struct flight* FlightPtr;
 
 /*****  fileconverter.c Prototypes  *****/
 void generate_file(const char[], int);
-void convert(const char*, const char*, Flight[]);
-void convertBinaryStringFile(const char*, Flight[], int);
+void convert(char*, Flight[], int);
+char* convertBinaryStringFile(const char*);
+Flight flightFromStr(char*);
 
 /*****  indexer.c Prototypes  *****/
 

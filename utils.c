@@ -10,8 +10,11 @@ Project: CSI402 Final Project
 */
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "header.h"
+
+#define CHAR_BIT 8
 
 int random_range(int lower, int upper) {
 	return (rand() % (upper - lower + 1)) + lower;

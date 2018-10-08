@@ -16,17 +16,27 @@ Project: CSI402 Final Project
 
 int main(int argc, char* argv[]) {
 	//const int num_flights = 2;// insisted on constant but wouldn't compile
-	#define num_flights 2
+	#define SIZE 20
 
-	Flight flights[num_flights];
+	Flight flights[SIZE];
+	int *num_flights;
 
-	generate_file("output.txt", num_flights);
-	//convert("output.bin", "", flights);
-	convertBinaryStringFile("output.bin", flights, num_flights);
+	// generate_file("output.txt", num_flights);
+	// convert("output.bin", "", flights);
+	// convert("test.bin", flights);
 
-	for (int i = 0; i < num_flights; i++) {
+	convert("output.bin", flights, SIZE);
+
+	for (int i=0; i<10; i++) {
 		print_flight(flights[i]);
 	}
+
+
+	// convertBinaryStringFile("test.bin", flights, num_flights);
+
+	// for (int i = 0; i < num_flights; i++) {
+	// 	print_flight(flights[i]);
+	// }
 
 	//printf("\n\nStrToBin: %s\n", strToBinStr("Test"));
 	//printf("BinToStr: %s\n", binStrToStr(strToBin("Test")));
