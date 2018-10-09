@@ -16,6 +16,8 @@ Project: CSI402 Final Project
 
 #define CHAR_BIT 8
 
+extern node* head;
+
 int random_range(int lower, int upper) {
 	return (rand() % (upper - lower + 1)) + lower;
 }
@@ -72,4 +74,13 @@ char* binStrToStr(char *bin) {
 
 	str[strLen] = '\0';
 	return str;
+}
+
+void printFlights(Sentinel s) {
+    node* temp = s->head;
+
+    while(temp != NULL) {
+        print_flight(temp->f);
+        temp = temp->next;
+    }
 }

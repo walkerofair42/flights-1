@@ -5,7 +5,9 @@ Authors:
 	Jason Deacutis
 Date: 9.30.2018
 Filename: fileconverter.c
-Purpose: Given a binary file of flight data, create .txt files for each airline, and           store them in appropriate directories. Also can generate the binary files             for testing purposes
+Purpose: Given a binary file of flight data, create .txt files for each airline, and           
+store them in appropriate directories. Can generate the binary files for testing purposes.
+Implements list data structure to store flights while being read from file
 Project: CSI402 Final Project
 */
 #include <stdio.h>
@@ -22,6 +24,7 @@ Flight flightFromStr(char*);
 
 /*
 @purpose: 		given a filename, Flight array, and number of flights return to the caller a populated array with flight data
+				uses linked list data structure to store elements while reading in from file
 @args:	  		char* str:	  	file name containing binary repr. of flights
 				Flight arr[]: 	allocated array of Flights
 				int numFlights:	size of array
@@ -29,14 +32,8 @@ Flight flightFromStr(char*);
 @assumptions: 	str is an existing file, the file is correctly formatted with flight data
 
 @todo: 			- create directories
-				- data structure to hold flights currently is inadequate
-					+ need ability to grow array size
-					+ functions needed like isFull(), insert(), retrieve(), etc.. maybe simple dynamic array?
-					+ client should simply declare custom list, pass to convert, and the custom list should take
-						care of growing and allocating more space if needed
-					** number of flights will not be known before hand **
 */
-void convert(char *str, Flight arr[], int numFlights) {
+void convert(char *str, Sentinel readList) {
 	char* raw_flights = convertBinaryStringFile(str);
 
 	char buff[FLIGHT_SIZE];
@@ -48,7 +45,7 @@ void convert(char *str, Flight arr[], int numFlights) {
 	for (int i=0; i<strlen(raw_flights); i++) {
 		if (raw_flights[i] == '\n') {
 			f = flightFromStr(buff);
-			arr[flight_c] = f;
+			push(f, readList);
 			memset(buff, 0, sizeof(buff));
 			buff_c = 0;
 			flight_c++;
@@ -59,9 +56,7 @@ void convert(char *str, Flight arr[], int numFlights) {
 	}
 
 	// will be one flight left in buffer
-	arr[flight_c] = flightFromStr(buff);
-	flight_c++;
-
+	push(f, readList);
 	printf("%d Flights were read into the array successfully!\n", flight_c);
 }
 

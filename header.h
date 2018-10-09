@@ -14,19 +14,36 @@ struct flight {
 	char origin[MAX_AIRLINE_CODE];
 	char dest[MAX_AIRLINE_CODE];
 	char timestamp[DATE_SIZE];
-};
+} typedef Flight;
+
+struct node {
+    struct flight f;
+    struct node *next;
+	//int size;
+} typedef node;
+
+struct sentinel {
+	node *head;
+	node *currPos;
+	int key;
+} typedef *Sentinel;
+
 
 /*****  Typing Definitions  *****/
-typedef struct flight Flight;
-typedef struct flight* FlightPtr;
 
 
 /*****  fileconverter.c Prototypes  *****/
+
 void generate_file(const char[], int);
-void convert(char*, Flight[], int);
+void convert(char*, Sentinel);
 char* convertBinaryStringFile(const char*);
 Flight flightFromStr(char*);
 
+/*****  list.c Prototypes  *****/
+void push(Flight, Sentinel);
+node* new(Flight);
+int numFlights();
+Sentinel newList();
 /*****  indexer.c Prototypes  *****/
 
 /*****  srchindx.c Prototypes  *****/
@@ -38,3 +55,4 @@ void print_flight(Flight);
 int random_range(int, int);
 char* strToBinStr(char*);
 char* binStrToStr(char*);
+void printFlights(Sentinel);
