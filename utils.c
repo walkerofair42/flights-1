@@ -84,3 +84,13 @@ void printFlights(Sentinel s) {
         temp = temp->next;
     }
 }
+
+void getFlightCode(Flight f, char code[]) {
+	int i = 0;
+
+	while(f.f_code[i] >= 65) {
+		code[i] = f.f_code[i];
+		i++;
+	}
+	code[i] = '\0';
+}

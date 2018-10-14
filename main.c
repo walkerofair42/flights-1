@@ -22,9 +22,23 @@ int main(int argc, char* argv[]) {
 	Sentinel flightList = newList();
 
 	convert("test.bin", flightList);
-	printFlights(flightList);
-	printf("Number of flights in file: %d\n", (flightList->key));
+	// printFlights(flightList);
+	createFiles(flightList, "");
 
+	// char code[5];
+
+	// getFlightCode(flightList->head->next->f, code);
+	// printf("%s\n", code);
+	// printf("Number of flights in file: %d\n", (flightList->key));
+	// printf("\n");
+	// printReverse(flightList);
+
+	// node *n1 = flightList->head->next;
+	// node *n2 = n1->next->next;
+
+	// swap(n1, n2, flightList);
+	// printf("\n");
+	// printFlights(flightList);
 
 	// convertBinaryStringFile("test.bin", flights, num_flights);
 
