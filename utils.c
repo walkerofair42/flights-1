@@ -76,13 +76,10 @@ char* binStrToStr(char *bin) {
 	return str;
 }
 
-void printFlights(Sentinel s) {
-    node* temp = s->head;
-
-    while(temp != NULL) {
-        print_flight(temp->f);
-        temp = temp->next;
-    }
+void printFlights(FlightArray *s) {
+	for(int i=0; i<s->size; i++) {
+		print_flight(get(i, s));
+	}
 }
 
 void getFlightCode(Flight f, char code[]) {

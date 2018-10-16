@@ -5,7 +5,10 @@
 #define MAX_AIRLINE_CODE 4
 #define DATE_SIZE 20
 #define FLIGHT_SIZE MAX_FLIGHT_CODE + (2*MAX_AIRLINE_CODE) + DATE_SIZE
+
 #define OUTPUT_FEXT ".txt"
+
+#define INIT_ARRAY_SIZE 4
 
 
 
@@ -30,6 +33,12 @@ struct sentinel {
 	int key;
 } typedef *Sentinel;
 
+struct flightArray {
+	int size;
+	int capacity;
+	struct flight *data;
+} typedef FlightArray;
+
 
 /*****  Typing Definitions  *****/
 
@@ -37,17 +46,17 @@ struct sentinel {
 /*****  fileconverter.c Prototypes  *****/
 
 void generate_file(const char[], int);
-void convert(char*, Sentinel);
+void convert(char*, FlightArray*);
 char* convertBinaryStringFile(const char*);
 Flight flightFromStr(char*);
-void createFiles(Sentinel, char*);
+void createFiles(FlightArray*, char*);
 
 /*****  list.c Prototypes  *****/
 void push(Flight, Sentinel);
 node* new(Flight);
 int numFlights();
 Sentinel newList();
-void swap(node*, node*, Sentinel);
+// void swap(node*, node*, Sentinel);
 void printReverse(Sentinel);
 
 /*****  hash.c Prototypes  *****/
@@ -67,5 +76,12 @@ void print_flight(Flight);
 int random_range(int, int);
 char* strToBinStr(char*);
 char* binStrToStr(char*);
-void printFlights(Sentinel);
+void printFlights(FlightArray*);
 void getFlightCode(Flight, char[]);
+
+/*****  array.c Prototypes  *****/
+void init_array(FlightArray*);
+void add(Flight , FlightArray*);
+Flight get(int, FlightArray*);
+void sort(FlightArray*);
+void destroy(FlightArray*);

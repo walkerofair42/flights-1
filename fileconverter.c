@@ -26,14 +26,14 @@ Flight flightFromStr(char*);
 @purpose: 		given a filename, Flight array, and number of flights return to the caller a populated array with flight data
 				uses linked list data structure to store elements while reading in from file
 @args:	  		char* str:	  	file name containing binary repr. of flights
-				Flight arr[]: 	allocated array of Flights
+				FlightArray *flightArray[]: allocated array of Flights
 				int numFlights:	size of array
 @return:  		populated arr with flight data contained in binary file
 @assumptions: 	str is an existing file, the file is correctly formatted with flight data
 
 @todo: 			- create directories
 */
-void convert(char *str, Sentinel readList) {
+void convert(char *str, FlightArray *flightArray) {
 	char* raw_flights = convertBinaryStringFile(str);
 
 	char buff[FLIGHT_SIZE];
@@ -45,7 +45,8 @@ void convert(char *str, Sentinel readList) {
 		if (raw_flights[i] == '\n') {
 			f = flightFromStr(buff);
 			// print_flight(f);
-			push(f, readList);
+			add(f, flightArray);
+			// push(f, readList);
 			memset(buff, 0, sizeof(buff));
 			buff_c = 0;
 		} else {
@@ -56,30 +57,25 @@ void convert(char *str, Sentinel readList) {
 
 	// will be one flight left in buffer
 	f = flightFromStr(buff);
-	// print_flight(f);
-	push(f, readList);
-	// printf("%d Flights were read into the array successfully!\n", readList->key);
+	add(f, flightArray);
 }
 
 // this is just a proof of concept function for testing
 // files will need to be created by the create program which hasn't been written yet
-void createFiles(Sentinel flightList, char* dir) {
-
-	node *temp = flightList->head;
+void createFiles(FlightArray *flightArray, char* dir) {
+	
 	char code[MAX_FLIGHT_CODE];
 	char *filename;
 	Flight f;
 
-	while(temp != NULL) {
-		f = temp->f;
-
+	for (int i=0; i<flightArray->size; i++) {
+		f = get(i, flightArray);
 		getFlightCode(f, code);
-		filename = "test.txt";//strcat(code, OUTPUT_FEXT);
+		filename = strcat(code, OUTPUT_FEXT);
 
 		FILE *fp = fopen(filename, "a+");
 		fprintf(fp, "%s %s %s %s\n",  f.f_code, f.origin, f.dest, f.timestamp);
 		fclose(fp);
-		temp = temp->next;
 	}
 }
 
