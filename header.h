@@ -9,6 +9,7 @@
 #define OUTPUT_FEXT ".txt"
 
 #define INIT_ARRAY_SIZE 4
+#define HASH_SIZE 50
 
 
 
@@ -23,21 +24,32 @@ struct flight {
 struct node {
     struct flight f;
     struct node *next;
-	struct node *prev;
-	//int size;
 } typedef node;
 
+// probably will not be used, old logic 
 struct sentinel {
 	node *head;
 	node *currPos;
 	int key;
 } typedef *Sentinel;
 
+// dynamic array for reading in binary file
 struct flightArray {
 	int size;
 	int capacity;
 	struct flight *data;
 } typedef FlightArray;
+
+// all table entries will be initalized to this struct which points to nodes
+struct hashkey {
+	int collisions;
+	node* data;
+} typedef hashkey;
+
+// represents a hash table
+struct hashtable {
+	hashkey *table[HASH_SIZE];
+} typedef FlightHash;
 
 
 /*****  Typing Definitions  *****/
@@ -52,7 +64,7 @@ Flight flightFromStr(char*);
 void createFiles(FlightArray*, char*);
 
 /*****  list.c Prototypes  *****/
-void push(Flight, Sentinel);
+void push(Flight, node*, int*);
 node* new(Flight);
 int numFlights();
 Sentinel newList();
@@ -60,10 +72,11 @@ Sentinel newList();
 void printReverse(Sentinel);
 
 /*****  hash.c Prototypes  *****/
-void insert(Flight);
-Flight retrieve(char*);
-int hash(Flight);
-void expand();
+void insert(Flight, FlightHash*);
+void retrieve(char*, FlightHash*, node*);
+void hash(char*, int*);
+void init_hash(FlightHash*);
+void hash_print(FlightHash*);
 
 /*****  indexer.c Prototypes  *****/
 

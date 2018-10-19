@@ -23,30 +23,32 @@ Flight flightFromStr(char*);
 
 
 /*
-@purpose: 		given a filename, Flight array, and number of flights return to the caller a populated array with flight data
-				uses linked list data structure to store elements while reading in from file
-@args:	  		char* str:	  	file name containing binary repr. of flights
-				FlightArray *flightArray[]: allocated array of Flights
-				int numFlights:	size of array
-@return:  		populated arr with flight data contained in binary file
-@assumptions: 	str is an existing file, the file is correctly formatted with flight data
+@purpose: 		converts a binary file of flights to a flightarray
+@args:	  		str: filename that contains the flight data
+				flightArray: initalized flightarray
+@assumptions: 	flightArray has been initialized
 
 @todo: 			- create directories
+				- error checking
 */
 void convert(char *str, FlightArray *flightArray) {
+
+	// convert binary file into raw string
 	char* raw_flights = convertBinaryStringFile(str);
 
+	// represents current flight in "buffer"
 	char buff[FLIGHT_SIZE];
 	int buff_c = 0;
 
 	Flight f;
 
+	// loop through string, adding chars to buffer
+	// if \n is encountered, convert the string to a flight and add to array
+	// will be one left over at end of reading
 	for (int i=0; i<strlen(raw_flights); i++) {
 		if (raw_flights[i] == '\n') {
 			f = flightFromStr(buff);
-			// print_flight(f);
 			add(f, flightArray);
-			// push(f, readList);
 			memset(buff, 0, sizeof(buff));
 			buff_c = 0;
 		} else {
@@ -130,6 +132,12 @@ Flight flightFromStr(char* str) {
 
 }
 
+/*
+@purpose: 		convert a binary file repr. flights to a raw string
+@args:	  		char* filename: valid .bin file repr. flights
+@return:  		raw string data from converted binary file
+@assumptions: 	filename is a valid binary file
+*/
 char* convertBinaryStringFile(const char* filename) {
 	FILE *fp = fopen(filename, "r");
 	if (fp == NULL) {
@@ -156,6 +164,8 @@ char* convertBinaryStringFile(const char* filename) {
 	// printf("%s\n", binStrToStr(str));
 	// convertStr(binStrToStr(str), arr, count);
 }
+
+/* OLD FUNCTIONS, PROBABLY WILL NOT BE USED */
 
 void convertStr(char* str, Flight arr[], int count) {
 	char data[FLIGHT_SIZE - 1];
@@ -230,7 +240,6 @@ void convertStr(char* str, Flight arr[], int count) {
 void generate_file(const char filename[], int count) {
 	const char *sample_airports[10] = { "AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH", "III", "JJJ" };
 	const char *sample_airlines[10] = { "ZZ", "YY", "XX", "WW", "VV", "UU", "TT", "SS", "RR", "QQ" };
-
 	FILE *fp;
 	FILE *fp_bin;
 

@@ -5,11 +5,8 @@ Authors:
 	Jason Deacutis
 Date: 9.09.2018
 Filename: list.c
-Purpose: Create a singly linked list to store flight data. keeps track of number
-         of flights. 
-         Uses a "sentinel" struct that points to the head of the list. this is so
-         we can use the linked list while reading in from file as well as chaining
-         for the hash table (to be implemented)
+Purpose: Create a singly linked list to store flight data.
+         Used by hash.c
 Project: CSI402 Final Project
 */
 
@@ -17,22 +14,23 @@ Project: CSI402 Final Project
 
 #include "header.h"
 
+// TODO: Write free() functions for the linked lists.
 
 /*
 @purpose: 		add a Flight to the list
 @args:	  		f is a valid Flight
-@assumptions: 	f,s have been instantiated
+@assumptions: 	f, c have been instantiated
+                head points to the first element in a linked list, and is not null
 */
-void push(Flight f, Sentinel s) {
-    if (s->head == NULL) {
-        s->head = new(f);
-        s->currPos = s->head;
+void push(Flight f, node* head, int* c) {
+
+    node *temp = head;
+    (*c)++;
+    while(temp->next != NULL) {
+        temp = temp->next;
     }
-    else {
-        s->currPos->next = new(f);
-        s->currPos = s->currPos->next;
-    }
-    s->key++;
+
+    temp->next = new(f);
 }
 
 /*
@@ -49,6 +47,8 @@ node* new(Flight f) {
     n->next = NULL;
     return n;
 }
+
+/* OLD LOGIC, PROBABLY WILL NOT BE USED */
 
 /*
 @purpose: 		return number of flights

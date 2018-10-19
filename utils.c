@@ -11,22 +11,36 @@ Project: CSI402 Final Project
 
 #include <stdlib.h>
 #include <string.h>
-
 #include "header.h"
 
 #define CHAR_BIT 8
 
 extern node* head;
 
+/*
+@purpose: 		returns a random range to the caller bound by lower, upper
+@args:	  		int lower: lower bound
+				int upper: upper bound
+@return:  		int: random number
+@assumptions: 	N/A
+*/
 int random_range(int lower, int upper) {
 	return (rand() % (upper - lower + 1)) + lower;
 }
 
+/*
+@purpose: 		prints a flight	
+@args:	  		flight: valid Flight struct
+@assumptions: 	flight has been instantiated and populated	
+*/
 void print_flight(Flight flight) {
 	printf("Flight Code: %s | Origin Airport: %s | Destination Airport: %s | Departure Date: %s\n",
 		flight.f_code, flight.origin, flight.dest, flight.timestamp);
 }
 
+/*
+@purpose: 		converts a string to a binary string
+*/
 char* strToBinStr(char *s) {
 	int len = strlen(s), binLen = len * CHAR_BIT;
 	char *bin = malloc(binLen + 1);
@@ -48,6 +62,9 @@ char* strToBinStr(char *s) {
 	return bin;
 }
 
+/*
+@purpose: 		converts a binary string to a string	
+*/
 char* binStrToStr(char *bin) {
 	int len = strlen(bin), strLen = len / CHAR_BIT;
 
@@ -76,12 +93,23 @@ char* binStrToStr(char *bin) {
 	return str;
 }
 
+/*
+@purpose: 		prints all flights in a given flight array
+@args:	  		*s: valid flight array
+@assumptions: 	*s: has been instantiated
+*/
 void printFlights(FlightArray *s) {
 	for(int i=0; i<s->size; i++) {
 		print_flight(get(i, s));
 	}
 }
 
+/*
+@purpose: 		returns a flight code for a given flight
+@args:	  		f: a valid flight
+				code: string to return to caller
+@assumptions: 	code is at least size of 5, f is a valid flight
+*/
 void getFlightCode(Flight f, char code[]) {
 	int i = 0;
 

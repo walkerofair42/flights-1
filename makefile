@@ -1,13 +1,13 @@
 CC = gcc
 CFLAGS = -g
-OBJECTS = main.o list.o fileconverter.o utils.o array.o
+OBJECTS = main.o list.o fileconverter.o utils.o array.o hash.o
 OUT_FILES = AA.txt DL.txt F.txt OO.txt
 
-prog: $(OBJECTS)
+test: $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 clean:
 	rm -f *.o core
-cleanoutput:
+cleanoutput: # clean up .txt files
 	rm -f $(OUT_FILES)
