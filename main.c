@@ -42,9 +42,23 @@ int main(int argc, char* argv[]) {
 
 	// print data structures
 	hash_print(&flightHash);
-	printFlights(&flightArray);
+	// printFlights(&flightArray);
 	
 	// tear down
 	destroy(&flightArray);
+
+	init_table();
+
+	read_files("AA.txt");
+	read_files("DL.txt");
+	read_files("F.txt");
+	read_files("OO.txt");
+
+	
+	write_file("invind.txt");
+
+	print_table();
+
+	printf("Normal end.\n");
 
 }

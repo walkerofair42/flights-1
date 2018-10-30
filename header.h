@@ -51,6 +51,17 @@ struct hashtable {
 	hashkey *table[HASH_SIZE];
 } typedef FlightHash;
 
+struct index {
+	char file[20];
+	int count;
+};
+struct airlineArray {
+	int size;
+	int capacity;
+	struct index *index;
+};
+
+struct airlineHash;
 
 /*****  Typing Definitions  *****/
 
@@ -79,7 +90,13 @@ void init_hash(FlightHash*);
 void hash_print(FlightHash*);
 
 /*****  indexer.c Prototypes  *****/
-
+void read_files(char*);
+void init_indexer();
+void init_table();
+void print_stack();
+unsigned long airport_hash(char*);
+void print_table();
+void write_file(char* filename);
 /*****  srchindx.c Prototypes  *****/
 
 /*****  create.c Prototypes  *****/
@@ -91,6 +108,7 @@ char* strToBinStr(char*);
 char* binStrToStr(char*);
 void printFlights(FlightArray*);
 void getFlightCode(Flight, char[]);
+void check_file(FILE*, char*);
 
 /*****  array.c Prototypes  *****/
 void init_array(FlightArray*);

@@ -5,3 +5,4 @@
 playground/*
 *.gch
 .vscode/*
+.DS_Store

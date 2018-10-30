@@ -119,3 +119,9 @@ void getFlightCode(Flight f, char code[]) {
 	}
 	code[i] = '\0';
 }
+
+void check_file(FILE* fp, char* prog) {
+	if (fp == NULL) {
+		perror(prog);
+	}
+}

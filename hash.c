@@ -33,7 +33,7 @@ void insert(Flight f, FlightHash *ht) {
     int key = 0;
     hash(f.origin, &key);
 
-    // get currnt value @ key, & number of collisions
+    // get current value @ key, & number of collisions
     node* value = ht->table[key]->data;
     int* collisions = &ht->table[key]->collisions;
 
