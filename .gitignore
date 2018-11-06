@@ -1,4 +1,8 @@
 *.o
-*.out
+*.out*
 *.txt
 *.bin
+playground/*
+*.gch
+.vscode/*
+.DS_Store
