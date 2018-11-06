@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// print data structures
-	hash_print(&flightHash);
+	hash_print(&flightHash, false);
 	// printFlights(&flightArray);
 	
 	// tear down
@@ -58,6 +58,10 @@ int main(int argc, char* argv[]) {
 	write_file("invind.txt");
 
 	print_table();
+
+	//search_flights("ORD");
+	//search_flights("PLN");
+	search_flights("DTW");
 
 	printf("Normal end.\n");
 
